@@ -18,5 +18,5 @@ export function withBase(route = ''): string {
 /** Link to a fragment on the home page (e.g. `services` → `/las-chicas/#services`). */
 export function withHash(fragment: string): string {
   const hash = fragment.startsWith('#') ? fragment : `#${fragment}`;
-  return `${siteBase().replace(/\/$/, '')}${hash}`;
+  return `${siteBase()}${hash}`;
 }

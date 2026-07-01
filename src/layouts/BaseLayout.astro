@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import { siteConfig } from '../config/site';
 import { getLocalBusinessSchema, jsonLd } from '../utils/seo';
-import { withBase } from '../utils/paths';
+import { withBase, withHash } from '../utils/paths';
 import SiteNav from '../components/SiteNav';
 import Footer from '../components/Footer.astro';
 
@@ -65,7 +65,12 @@ const schemas = schema
   </head>
   <body class="min-h-screen bg-[#0a0a0a] text-slate-300 selection:bg-amber-500 selection:text-[#0a0a0a]">
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    <SiteNav client:load />
+    <SiteNav
+      client:load
+      homeHref={withBase()}
+      servicesHref={withHash('services')}
+      contactHref={withBase('contact')}
+    />
     <slot />
     <Footer />
   </body>

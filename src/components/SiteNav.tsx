@@ -1,15 +1,20 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { withBase, withHash } from '../utils/paths';
 
-const navLinks = [
-  { href: withBase(), label: 'Home' },
-  { href: withHash('services'), label: 'The Services' },
-  { href: withBase('contact'), label: 'Contact' },
-];
+interface SiteNavProps {
+  homeHref: string;
+  servicesHref: string;
+  contactHref: string;
+}
 
-export default function SiteNav() {
+export default function SiteNav({ homeHref, servicesHref, contactHref }: SiteNavProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const navLinks = [
+    { href: homeHref, label: 'Home' },
+    { href: servicesHref, label: 'The Services' },
+    { href: contactHref, label: 'Contact' },
+  ];
 
   return (
     <>
@@ -34,7 +39,7 @@ export default function SiteNav() {
               </a>
             ))}
             <a
-              href={withBase('contact')}
+              href={contactHref}
               onClick={() => setMenuOpen(false)}
               className="hover:text-amber-500 transition-colors text-amber-500 italic mt-8 border-b border-amber-500/30 pb-2"
             >
@@ -50,7 +55,7 @@ export default function SiteNav() {
       >
         <div className="max-w-7xl mx-auto px-6 h-20 md:h-24 flex justify-between items-center">
           <a
-            href={withBase()}
+            href={homeHref}
             className="text-white font-light text-lg md:text-xl tracking-[0.2em] uppercase"
           >
             Las Chicas<span className="text-amber-500 font-bold"> Cleaning</span>
