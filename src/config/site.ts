@@ -20,7 +20,6 @@ export const siteConfig = {
     country: 'GB',
     postalCode: 'EH1',
   },
-  companyNumber: 'SC000000',
   priceRange: '££',
   ogImage:
     'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80',
