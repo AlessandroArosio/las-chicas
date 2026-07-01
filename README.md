@@ -61,7 +61,7 @@ You want only **Deploy to GitHub Pages** to run.
 
 1. Open your repo on GitHub → **Settings** → **Pages**
 2. Under **Build and deployment** → **Source**, select **GitHub Actions**
-3. Do **not** use "Deploy from a branch" (that triggers Jekyll on `main`)
+3. Do **not** use "Deploy from a branch" (that triggers Jekyll on your source branch)
 
 Also check **Settings** → **Actions** → **General** → **Workflow permissions** → enable **Read and write permissions**.
 
@@ -70,7 +70,7 @@ Also check **Settings** → **Actions** → **General** → **Workflow permissio
 ```bash
 git add .
 git commit -m "Use GitHub Actions for Pages deployment"
-git push origin main
+git push origin master
 ```
 
 Then open **Actions** → **Deploy to GitHub Pages** → both `build` and `deploy` jobs should pass.
