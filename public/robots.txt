@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://YOUR_USERNAME.github.io/laschicas-cleaning/sitemap-index.xml
+# Update YOUR_USERNAME to match your GitHub account after deploy
+Sitemap: https://YOUR_USERNAME.github.io/las-chicas/sitemap-index.xml

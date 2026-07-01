@@ -10,7 +10,7 @@ cp .env.example .env   # add your Web3Forms key
 npm run dev
 ```
 
-Open [http://localhost:4321/laschicas-cleaning/](http://localhost:4321/laschicas-cleaning/) (base path matches GitHub Pages project site).
+Open [http://localhost:4321/las-chicas/](http://localhost:4321/las-chicas/) (base path must match your GitHub repo name).
 
 ```bash
 npm run build    # output in dist/
@@ -44,36 +44,42 @@ If the key is missing, the form shows a friendly error with phone/email fallback
 
 ## GitHub Pages deployment
 
-### 1. Create repository
+### Fix: "Invalid YAML front matter" / Jekyll build error
+
+That error means GitHub Pages is trying to **Jekyll-build your source code on `main`** (including `.astro` files). This site is Astro, not Jekyll.
+
+**Do this once in your repo settings:**
+
+1. Go to **Settings → Pages → Build and deployment**
+2. Set **Source** to **Deploy from a branch**
+3. Set **Branch** to **`gh-pages`** and folder **`/ (root)`**
+4. **Do not** deploy from `main` — `main` contains source code only
+
+The workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) builds Astro and pushes the compiled `dist/` folder to the `gh-pages` branch automatically on every push to `main`.
+
+### 1. Push to GitHub
 
 ```bash
-git init
 git add .
-git commit -m "Initial Las Chicas Cleaning website"
-git remote add origin https://github.com/YOUR_USERNAME/laschicas-cleaning.git
-git push -u origin main
+git commit -m "Fix GitHub Pages deployment"
+git push origin main
 ```
 
-### 2. Enable GitHub Pages
+### 2. Wait for the workflow
 
-1. **Settings → Pages → Build and deployment → Source:** GitHub Actions
-2. Push to `main` — the workflow in [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) builds and deploys automatically
+Open the **Actions** tab → **Deploy Astro site to GitHub Pages** → confirm it succeeds and creates/updates the `gh-pages` branch.
 
-### 3. Configure site URL
+### 3. Configure Pages (if not done above)
 
-Replace `YOUR_USERNAME` in:
+**Settings → Pages → Branch:** `gh-pages` / `/ (root)` → Save
 
-- [`astro.config.mjs`](astro.config.mjs) defaults
-- [`public/robots.txt`](public/robots.txt)
+Live URL (repo `las-chicas`): `https://YOUR_USERNAME.github.io/las-chicas/`
 
-Or set repository **Variables** (optional, overrides defaults in CI):
+The workflow sets `PUBLIC_SITE_URL` and `PUBLIC_BASE_PATH` automatically from your repo (`https://<owner>.github.io` and `/<repo-name>`). For local dev, copy [`.env.example`](.env.example) and set `PUBLIC_BASE_PATH=/las-chicas` to match your repo name.
 
-| Variable | Example |
-|----------|---------|
-| `PUBLIC_SITE_URL` | `https://yourusername.github.io` |
-| `PUBLIC_BASE_PATH` | `/laschicas-cleaning` |
+### Optional: repository secret
 
-Live URL: `https://YOUR_USERNAME.github.io/laschicas-cleaning/`
+**Settings → Secrets → Actions** → add `PUBLIC_WEB3FORMS_KEY` so the contact form works in production.
 
 ## Custom domain setup
 

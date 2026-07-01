@@ -4,7 +4,8 @@ import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
-const base = process.env.PUBLIC_BASE_PATH ?? '/laschicas-cleaning';
+// Base path must match the GitHub repo name for project pages (e.g. /las-chicas).
+const base = process.env.PUBLIC_BASE_PATH ?? '/las-chicas';
 const siteRoot = process.env.PUBLIC_SITE_URL ?? 'https://YOUR_USERNAME.github.io';
 
 // https://astro.build/config
