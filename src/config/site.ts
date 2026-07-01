@@ -27,15 +27,16 @@ export const siteConfig = {
   web3formsKey: import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '',
 } as const;
 
+/** Service and hero imagery (Unsplash). Verify URLs return HTTP 200 before deploy. */
 export const images = {
   heroLuxury:
     'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=2000&q=80',
   domestic:
     'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80',
   holidayLet:
-    'https://images.unsplash.com/photo-1618220179428-22790b46a011?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1638929786164-04068be458e0?auto=format&fit=crop&w=800&q=80',
   commercial:
-    'https://images.unsplash.com/photo-1524813686514-a57563d77965?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1745015446589-7ee6f702d8c1?auto=format&fit=crop&w=800&q=80',
   endOfTenancy:
     'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80',
 } as const;

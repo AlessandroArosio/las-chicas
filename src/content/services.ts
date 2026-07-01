@@ -112,7 +112,7 @@ export const servicesData: Service[] = [
     short: 'Offices & Retail',
     desc: 'Out-of-hours cleaning for offices, retail stores, and hospitality venues across the city.',
     img: images.commercial,
-    imgAlt: 'Commercial office cleaning in Edinburgh city centre',
+    imgAlt: 'Modern glass-fronted office building in Edinburgh city centre',
     path: '/services/commercial-cleaning-edinburgh',
     metaTitle: 'Commercial & Office Cleaning Edinburgh | Las Chicas Cleaning',
     metaDescription:

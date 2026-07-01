@@ -29,7 +29,7 @@ Edit [`src/config/site.ts`](src/config/site.ts):
 | `companyNumber` | `SC000000` |
 | `address.postalCode` | `EH1` |
 
-Replace Unsplash images in `images` with your own photos for better trust and uniqueness.
+Replace Unsplash images in `images` with your own photos for better trust and uniqueness. If a service image disappears after deploy, the Unsplash URL may have been removed—swap it in `src/config/site.ts` and confirm the link returns HTTP 200.
 
 Update [`public/robots.txt`](public/robots.txt) sitemap URL when your domain is final.
 
