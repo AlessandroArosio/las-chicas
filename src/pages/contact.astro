@@ -2,11 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm';
 import { siteConfig } from '../config/site';
+import { withBase } from '../utils/paths';
 
 const title = `Contact ${siteConfig.name} | Edinburgh Cleaning Quotes`;
 const description =
   'Request a cleaning quote in Edinburgh. Domestic, commercial, holiday let and end-of-tenancy services. Call or send a message today.';
-const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title={title} description={description}>
@@ -48,7 +48,7 @@ const base = import.meta.env.BASE_URL;
         {siteConfig.email}
       </a>
       ·
-      <a href={`${base}privacy`} class="hover:text-amber-500 transition-colors">Privacy Policy</a>
+      <a href={withBase('privacy')} class="hover:text-amber-500 transition-colors">Privacy Policy</a>
     </p>
   </main>
 </BaseLayout>

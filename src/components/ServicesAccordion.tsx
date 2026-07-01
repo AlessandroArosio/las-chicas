@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { servicesData } from '../content/services';
-
-const base = import.meta.env.BASE_URL;
+import { withBase } from '../utils/paths';
 
 export default function ServicesAccordion() {
   const [openAccordion, setOpenAccordion] = useState<number | null>(1);
@@ -54,7 +53,7 @@ export default function ServicesAccordion() {
                     {service.desc}
                   </p>
                   <a
-                    href={`${base}${service.path.replace(/^\//, '')}`}
+                    href={withBase(service.path)}
                     className="text-white text-xs tracking-widest uppercase border-b border-amber-500 pb-1 hover:text-amber-500 transition-colors"
                   >
                     Learn more about {service.title.toLowerCase()}

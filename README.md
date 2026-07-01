@@ -150,6 +150,7 @@ Rebuild and redeploy. Update `robots.txt` sitemap URL to match.
 |------|-------|
 | Business details | [`src/config/site.ts`](src/config/site.ts) |
 | Services, FAQs, page copy | [`src/content/services.ts`](src/content/services.ts) |
+| Internal links (GitHub Pages base path) | [`src/utils/paths.ts`](src/utils/paths.ts) — use `withBase()` for all routes |
 | Homepage hero | [`src/components/Hero.astro`](src/components/Hero.astro) |
 | Privacy policy | [`src/pages/privacy.astro`](src/pages/privacy.astro) |
 
@@ -164,7 +165,9 @@ src/
 ├── layouts/             # BaseLayout, ServicePageLayout
 ├── components/          # React islands + Astro sections
 ├── pages/               # Routes
-└── utils/seo.ts         # JSON-LD helpers
+└── utils/
+    ├── paths.ts         # withBase() / withHash() for GitHub Pages subpath
+    └── seo.ts           # JSON-LD helpers
 ```
 
 ## Licence

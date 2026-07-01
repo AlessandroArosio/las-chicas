@@ -1,8 +1,8 @@
 ---
 import { siteConfig } from '../config/site';
 import { Phone, Mail, Instagram, Facebook } from 'lucide-react';
+import { withBase } from '../utils/paths';
 
-const base = import.meta.env.BASE_URL;
 const currentYear = new Date().getFullYear();
 ---
 
@@ -38,7 +38,7 @@ const currentYear = new Date().getFullYear();
         </a>
         <p class="pt-2">Serving Edinburgh &amp; The Lothians</p>
         <a
-          href={`${base}contact`}
+          href={withBase('contact')}
           class="inline-block text-amber-500 text-xs tracking-widest uppercase border-b border-amber-500/30 pb-1 hover:text-white transition-colors"
         >
           Send a message
@@ -73,7 +73,7 @@ const currentYear = new Date().getFullYear();
       <p class="text-slate-500 text-xs">
         &copy; {currentYear} {siteConfig.legalName}.<br />
         Company No. {siteConfig.companyNumber}<br />
-        <a href={`${base}privacy`} class="hover:text-amber-500 transition-colors">Privacy Policy</a>
+        <a href={withBase('privacy')} class="hover:text-amber-500 transition-colors">Privacy Policy</a>
       </p>
     </div>
   </div>

@@ -8,8 +8,8 @@ export const siteConfig = {
   tagline: "Edinburgh's Premium Cleaning Service",
   description:
     'Professional cleaning in Edinburgh and the Lothians. Domestic homes, offices, Airbnb turnarounds and end-of-tenancy cleans. Fully insured.',
-  phone: '+441310000000',
-  phoneDisplay: '+44 (0) 131 000 0000',
+  phone: '+447947941337',
+  phoneDisplay: '+44 (0) 79 4794 1337',
   email: 'hello@laschicascleaning.co.uk',
   instagram: 'https://instagram.com/laschicascleaning',
   facebook: 'https://facebook.com/laschicascleaning',
