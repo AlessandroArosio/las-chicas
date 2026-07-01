@@ -1,0 +1,9 @@
+---
+import ServicePageLayout from '../../layouts/ServicePageLayout.astro';
+import { getServiceBySlug } from '../../content/services';
+
+const service = getServiceBySlug('end-of-tenancy-cleaning-edinburgh');
+if (!service) throw new Error('Service not found');
+---
+
+<ServicePageLayout service={service} />

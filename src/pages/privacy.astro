@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../config/site';
+
+const title = `Privacy Policy | ${siteConfig.name}`;
+const description = `Privacy policy for ${siteConfig.name}. How we collect and use contact form data.`;
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title={title} description={description} noindex={true}>
+  <main id="main-content" class="pt-32 pb-20 px-6 max-w-3xl mx-auto font-sans">
+    <h1 class="text-3xl md:text-4xl text-white font-light mb-8">Privacy Policy</h1>
+    <div class="space-y-6 text-slate-400 text-sm leading-relaxed">
+      <p>
+        {siteConfig.legalName} ("we", "us") operates this website. This policy explains how we handle
+        personal data when you contact us.
+      </p>
+      <section>
+        <h2 class="text-white text-lg mb-3">What we collect</h2>
+        <p>
+          When you submit our contact form, we collect your name, email address, phone number (if
+          provided), service interest and message. This data is sent to us by email via Web3Forms so
+          we can respond to your enquiry.
+        </p>
+      </section>
+      <section>
+        <h2 class="text-white text-lg mb-3">How we use your data</h2>
+        <p>
+          We use your information solely to reply to your enquiry and provide cleaning quotes or
+          services. We do not sell your data to third parties.
+        </p>
+      </section>
+      <section>
+        <h2 class="text-white text-lg mb-3">Cookies</h2>
+        <p>
+          This website does not use analytics or advertising cookies. The contact form may set
+          essential technical cookies required by our form provider to prevent spam.
+        </p>
+      </section>
+      <section>
+        <h2 class="text-white text-lg mb-3">Your rights</h2>
+        <p>
+          Under UK GDPR you may request access, correction or deletion of your personal data. Contact
+          us at{' '}
+          <a href={`mailto:${siteConfig.email}`} class="text-amber-500 hover:underline">
+            {siteConfig.email}
+          </a>
+          .
+        </p>
+      </section>
+      <p class="text-slate-500 text-xs pt-6">
+        Last updated: July 2026 ·{' '}
+        <a href={base} class="hover:text-amber-500 transition-colors">Back to home</a>
+      </p>
+    </div>
+  </main>
+</BaseLayout>

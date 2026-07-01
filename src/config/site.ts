@@ -1,0 +1,41 @@
+/**
+ * Central site configuration. Update placeholders before launch.
+ * NAP (name, address, phone) must match Google Business Profile exactly.
+ */
+export const siteConfig = {
+  name: 'Las Chicas Cleaning',
+  legalName: 'Las Chicas Cleaning',
+  tagline: "Edinburgh's Premium Cleaning Service",
+  description:
+    'Professional cleaning in Edinburgh and the Lothians. Domestic homes, offices, Airbnb turnarounds and end-of-tenancy cleans. Fully insured.',
+  phone: '+441310000000',
+  phoneDisplay: '+44 (0) 131 000 0000',
+  email: 'hello@laschicascleaning.co.uk',
+  instagram: 'https://instagram.com/laschicascleaning',
+  facebook: 'https://facebook.com/laschicascleaning',
+  areaServed: ['Edinburgh', 'The Lothians'],
+  address: {
+    locality: 'Edinburgh',
+    region: 'Scotland',
+    country: 'GB',
+    postalCode: 'EH1',
+  },
+  companyNumber: 'SC000000',
+  priceRange: '££',
+  ogImage:
+    'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80',
+  web3formsKey: import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '',
+} as const;
+
+export const images = {
+  heroLuxury:
+    'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=2000&q=80',
+  domestic:
+    'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80',
+  holidayLet:
+    'https://images.unsplash.com/photo-1618220179428-22790b46a011?auto=format&fit=crop&w=800&q=80',
+  commercial:
+    'https://images.unsplash.com/photo-1524813686514-a57563d77965?auto=format&fit=crop&w=800&q=80',
+  endOfTenancy:
+    'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80',
+} as const;

@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ServicesAccordion from '../components/ServicesAccordion';
+import { siteConfig } from '../config/site';
+
+const title = `${siteConfig.name} Edinburgh | Domestic, Commercial & Holiday Let Cleaning`;
+const description = siteConfig.description;
+---
+
+<BaseLayout title={title} description={description}>
+  <Hero />
+  <main id="main-content" class="py-20 md:py-32 max-w-7xl mx-auto px-6 font-sans">
+    <h2 class="text-xs text-slate-500 uppercase tracking-[0.2em] mb-12 md:mb-20 text-center">
+      Service Portfolio
+    </h2>
+    <ServicesAccordion client:load />
+  </main>
+</BaseLayout>

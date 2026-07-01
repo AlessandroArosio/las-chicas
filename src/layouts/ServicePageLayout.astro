@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { Service } from '../content/services';
+import { servicesData } from '../content/services';
+import {
+  getLocalBusinessSchema,
+  getServiceSchema,
+  getBreadcrumbSchema,
+  getFaqSchema,
+} from '../utils/seo';
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+const base = import.meta.env.BASE_URL;
+
+const otherServices = servicesData.filter((s) => s.id !== service.id);
+
+const schema = [
+  getLocalBusinessSchema(),
+  getServiceSchema(service),
+  getBreadcrumbSchema([
+    { name: 'Home', path: base },
+    { name: 'Services', path: `${base}#services` },
+    { name: service.title, path: `${base}${service.path.replace(/^\//, '')}` },
+  ]),
+  getFaqSchema(service.faqs),
+];
+---
+
+<BaseLayout
+  title={service.metaTitle}
+  description={service.metaDescription}
+  ogImage={service.img}
+  schema={schema}
+>
+  <main id="main-content" class="pt-32 pb-20 px-6 max-w-4xl mx-auto font-sans">
+    <nav aria-label="Breadcrumb" class="text-xs text-slate-500 tracking-widest uppercase mb-8">
+      <a href={base} class="hover:text-amber-500 transition-colors">Home</a>
+      <span class="mx-2">/</span>
+      <a href={`${base}#services`} class="hover:text-amber-500 transition-colors">Services</a>
+      <span class="mx-2">/</span>
+      <span class="text-slate-400">{service.title}</span>
+    </nav>
+
+    <article>
+      <p class="text-amber-500 text-xs tracking-widest uppercase mb-4">{service.short}</p>
+      <h1 class="text-3xl md:text-5xl text-white font-light mb-6 leading-tight">{service.h1}</h1>
+
+      <div class="aspect-video w-full relative rounded overflow-hidden border border-white/10 mb-10">
+        <img
+          src={service.img}
+          alt={service.imgAlt}
+          class="w-full h-full object-cover opacity-90"
+          width="800"
+          height="450"
+          loading="eager"
+        />
+      </div>
+
+      <p class="text-slate-300 text-lg leading-relaxed mb-6">{service.intro}</p>
+      {
+        service.body.map((paragraph) => (
+          <p class="text-slate-400 leading-relaxed mb-6">{paragraph}</p>
+        ))
+      }
+
+      <section class="mt-16 border-t border-white/10 pt-12">
+        <h2 class="text-white text-2xl font-light mb-8">Frequently asked questions</h2>
+        <div class="space-y-8">
+          {
+            service.faqs.map((faq) => (
+              <div>
+                <h3 class="text-amber-500 text-sm tracking-wide mb-2">{faq.question}</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">{faq.answer}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="mt-16 border-t border-white/10 pt-12">
+        <h2 class="text-white text-xl font-light mb-6">Other services</h2>
+        <ul class="space-y-3 text-sm">
+          {
+            otherServices.map((other) => (
+              <li>
+                <a
+                  href={`${base}${other.path.replace(/^\//, '')}`}
+                  class="text-slate-400 hover:text-amber-500 transition-colors border-b border-white/10 pb-1"
+                >
+                  {other.title} in Edinburgh
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <div class="mt-16 p-8 border border-amber-500/20 bg-amber-500/5 text-center">
+        <p class="text-white text-lg mb-4">Ready to book {service.title.toLowerCase()}?</p>
+        <a
+          href={`${base}contact`}
+          class="inline-block px-8 py-3 text-xs tracking-widest uppercase bg-amber-500 text-[#0a0a0a] hover:bg-amber-400 transition-colors"
+        >
+          Request a quote
+        </a>
+      </div>
+    </article>
+  </main>
+</BaseLayout>
