@@ -44,42 +44,44 @@ If the key is missing, the form shows a friendly error with phone/email fallback
 
 ## GitHub Pages deployment
 
-### Fix: "Invalid YAML front matter" / Jekyll build error
+### Same Jekyll error? (`jekyll v3.10.0`, `jekyll-build-pages`)
 
-That error means GitHub Pages is trying to **Jekyll-build your source code on `main`** (including `.astro` files). This site is Astro, not Jekyll.
+**Yes — that is the same problem.** GitHub is still trying to build your site with Jekyll instead of using the Astro workflow.
 
-**Do this once in your repo settings:**
+Check which workflow failed in the **Actions** tab:
 
-1. Go to **Settings → Pages → Build and deployment**
-2. Set **Source** to **Deploy from a branch**
-3. Set **Branch** to **`gh-pages`** and folder **`/ (root)`**
-4. **Do not** deploy from `main` — `main` contains source code only
+| Workflow name | What it means |
+|---------------|---------------|
+| **pages build and deployment** (job: `build`, uses `jekyll-build-pages`) | Wrong Pages setting — GitHub is building a branch with Jekyll |
+| **Deploy to GitHub Pages** (jobs: `build` + `deploy`, uses `npm run build`) | Correct Astro workflow |
 
-The workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) builds Astro and pushes the compiled `dist/` folder to the `gh-pages` branch automatically on every push to `main`.
+You want only **Deploy to GitHub Pages** to run.
 
-### 1. Push to GitHub
+### One-time Pages configuration (required)
+
+1. Open your repo on GitHub → **Settings** → **Pages**
+2. Under **Build and deployment** → **Source**, select **GitHub Actions**
+3. Do **not** use "Deploy from a branch" (that triggers Jekyll on `main`)
+
+Also check **Settings** → **Actions** → **General** → **Workflow permissions** → enable **Read and write permissions**.
+
+### Deploy
 
 ```bash
 git add .
-git commit -m "Fix GitHub Pages deployment"
+git commit -m "Use GitHub Actions for Pages deployment"
 git push origin main
 ```
 
-### 2. Wait for the workflow
+Then open **Actions** → **Deploy to GitHub Pages** → both `build` and `deploy` jobs should pass.
 
-Open the **Actions** tab → **Deploy Astro site to GitHub Pages** → confirm it succeeds and creates/updates the `gh-pages` branch.
+Live URL: `https://YOUR_USERNAME.github.io/las-chicas/`
 
-### 3. Configure Pages (if not done above)
+The workflow sets `PUBLIC_SITE_URL` and `PUBLIC_BASE_PATH` automatically from your repo name.
 
-**Settings → Pages → Branch:** `gh-pages` / `/ (root)` → Save
+### Optional: contact form secret
 
-Live URL (repo `las-chicas`): `https://YOUR_USERNAME.github.io/las-chicas/`
-
-The workflow sets `PUBLIC_SITE_URL` and `PUBLIC_BASE_PATH` automatically from your repo (`https://<owner>.github.io` and `/<repo-name>`). For local dev, copy [`.env.example`](.env.example) and set `PUBLIC_BASE_PATH=/las-chicas` to match your repo name.
-
-### Optional: repository secret
-
-**Settings → Secrets → Actions** → add `PUBLIC_WEB3FORMS_KEY` so the contact form works in production.
+**Settings → Secrets and variables → Actions** → add `PUBLIC_WEB3FORMS_KEY`.
 
 ## Custom domain setup
 

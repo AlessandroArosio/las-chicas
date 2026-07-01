@@ -1,7 +1,8 @@
-name: Deploy Astro site to GitHub Pages
+name: Deploy to GitHub Pages
 
-# Builds the Astro site and publishes ONLY the dist/ folder to the gh-pages branch.
-# Do NOT set GitHub Pages to deploy from main — that triggers Jekyll on source files.
+# IMPORTANT: In repo Settings → Pages → Build and deployment → Source,
+# choose "GitHub Actions" (NOT "Deploy from a branch").
+# If Source is set to a branch, GitHub runs Jekyll on your .astro source files and fails.
 
 on:
   push:
@@ -9,14 +10,16 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 concurrency:
   group: pages
   cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -31,16 +34,25 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
+      - name: Build Astro site
         run: npm run build
         env:
           PUBLIC_WEB3FORMS_KEY: ${{ secrets.PUBLIC_WEB3FORMS_KEY }}
           PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io
           PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
 
-      - name: Deploy to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          # peaceiris adds .nojekyll automatically — prevents Jekyll processing
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
